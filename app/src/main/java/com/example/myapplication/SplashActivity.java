@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +23,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SplashActivity extends AppCompatActivity {
 
     private final int splash_lenght = 8000;
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
 
         if (internetConnection()){
             Toast.makeText(this, "اینترنت شما متصل است", Toast.LENGTH_SHORT).show();
@@ -55,6 +61,7 @@ public class SplashActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imgSplash);
         TextView textView = findViewById(R.id.txtSplash);
         TextView textView1 = findViewById(R.id.txt2Splash);
+        ProgressBar progressBar = findViewById(R.id.progress_bar);
 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -77,6 +84,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 SplashActivity.this.startActivity(intent);
                 SplashActivity.this.finish();
+                progressBar.setProgress(2);
             }
         }, splash_lenght);
     }
